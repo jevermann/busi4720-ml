@@ -1,3 +1,4 @@
+import plotly.subplots
 import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 import datetime
@@ -9,6 +10,14 @@ import datetime
 # Normalize pixel values to be between 0 and 1
 train_images, test_images = \
 train_images / 255.0, test_images / 255.0
+
+# Show some example images
+import plotly
+import plotly.express as px
+fig = plotly.subplots.make_subplots(rows=5, cols=5)
+for i in range(25):
+    fig.add_trace(px.imshow(train_images[i]).data[0], row=i // 5 + 1, col=i % 5 + 1)
+fig.show(renderer='browser')
 
 # Create a simple convolutional model:
 model = models.Sequential()
